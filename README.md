@@ -1,5 +1,5 @@
-# Programming-the-Microchip-ATmega16-in-C
-University project: Programming the Microchip ATmega16 in C
+# Programming-the-Microchip-ATmega16
+University project: Programming the Microchip ATmega16 in C and assembly
 
 required software: CodeVision & Proteus 8 Professional
 
