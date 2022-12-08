@@ -1,0 +1,96 @@
+#include<mega16.h>
+#include<delay.h>
+flash unsigned char 
+digit[10]={0b01000000,0b011111001,0b00100100,0b00110000,0b00011001,
+0b00010010,0b00000010,0b01111000,0b00000000,0b00010000};
+ void  main(void)
+{
+ char i=0;
+ char j=0;
+ int z=0;
+
+ DDRB=0Xff;
+ PORTB=0X00; 
+ 
+ DDRD=0Xff;
+ PORTD=0X00;         
+ 
+ DDRA=0Xff;    //for buzzer  \
+ DDRC=0X00;    //for push btn
+ 
+ while(1)
+ {  
+    for (i=0;i<6;i++)
+    {
+        
+        
+        for(j=0;j<10;j++)
+        {        
+             
+                PORTA.6=0; // for mute the buzzer
+                if(i!=0)
+                { 
+                    if(j==0)
+                    {                     
+                     PORTA.6=1;  
+                    }       
+                 }
+            
+            for (z=0;z<500;z++)
+            {
+                PORTD=1;
+                PORTB=digit[i];
+                delay_ms(1);
+                PORTD=0X02;       
+                PORTB=digit[j];
+                delay_ms(1);    
+            }               
+            
+            //---------------------------------------------------------------------------------   
+                if (PINC.0==1)
+                {
+                     
+                  while(1)      
+                  {      
+                                   
+                        
+                           PORTA.6=0; // for mute the buzzer
+                           if(i!=0)
+                           { 
+                            if(j==0)
+                            {                     
+                                PORTA.6=1;  
+                            }       
+                           }
+                                
+                           for (z=0;z<500;z++)   // for display the number
+                           {
+                             PORTD=1;
+                             PORTB=digit[i];
+                             delay_ms(1);
+                             
+                             PORTD=0X02;       
+                             PORTB=digit[j];
+                             delay_ms(1);    
+                           }    
+                             
+                        if(j==0)
+                        {  
+                          if(i==0)
+                          {
+                           //if (j==0)
+                           { i=10; }  //  [0](0) ->
+                          }
+                          
+                         j= 10 ;  // j from [0] will be -> [9 ]   in **
+                         i-=1;  // number - 10 ; if [j]A - [1]0 = [j-1]A    here is [[[[ *  ]]]]
+                        }
+                        j-=1;   // number + 1            here is [[[[ ** ]]]]]    
+                   }      
+                 }
+                
+        }
+     
+    }
+ } 
+ }

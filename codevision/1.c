@@ -1,0 +1,48 @@
+#include<mega16.h>
+#include<delay.h>
+
+void main(void)
+{
+ //              order : red yellow green yellow red 
+ //              b1.1=red   .2=yellow .3=g     
+ DDRB=0Xff; // for lights 
+ DDRA=0X00; // for push btn
+ DDRD=0Xff; // for buzzer 
+    while(1) 
+    {                  
+      PORTB.1=1;
+      PORTB.2=0;
+      PORTB.3=0;      
+      delay_ms(1000);  // red    
+      
+       if (PORTB.1==1)
+       {  
+          if(PINA.0==1 )  
+          {
+              PORTD.6=1; 
+          }    
+        // while(PINA.0==1);      
+       }
+         //while(PINA.0==1); 
+            
+      PORTB.1=0;
+      PORTB.2=1;
+      PORTB.3=0;      
+      delay_ms(1000);  //y
+      
+      PORTB.1=0;
+      PORTB.2=0;
+      PORTB.3=1;      
+      delay_ms(1000);   //g    
+      
+      PORTB.1=0;
+      PORTB.2=1;
+      PORTB.3=0;      
+      delay_ms(1000);  //y   
+      
+     // PORTB.1=1;
+     // PORTB.2=0;
+     // PORTB.3=0;      
+     // delay_ms(1000);  // red  
+     }
+}
